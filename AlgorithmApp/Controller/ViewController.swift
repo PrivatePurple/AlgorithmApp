@@ -12,7 +12,7 @@ class AlgorithmViewController: UIViewController
 {
     @IBOutlet weak var SwiftImage: UIImageView!
     
-    @IBOutlet weak var AlgorithmText: UILabel!
+    @IBOutlet weak var algorithmText: UILabel!
     
    public override func viewDidLoad()
     {
@@ -31,6 +31,25 @@ class AlgorithmViewController: UIViewController
         let stepThree : String = "Step 3: Give the app a name, and then hit “Finish”."
         let stepFour : String = "Step 4: Create a repository for your app on Github, and make sure you make your first Commit. REMEMBER TO SET YOUR GIT IGNORE TO .xcuserstate."
         let stepFive : String = "Step 5: Organize your files into the folders of Controller, View, Model, and Resources."
+        
+        let algorithm = [stepOne, stepTwo, stepThree, stepFour, stepFive]
+        
+        let attributesDictionary =  [NSAttributedStringKey.font : algorithmText.font]
+        let fullAttributedString = NSMutableAttributedString(string: title, attributes: attributesDictionary)
+        
+        for step in algorithm
+        {
+            let bullet : String = "👾"
+            let formattedStep : String = "\n\(bullet) \(step)"
+            let attributedStringStep : NSMutableAttributedString = NSMutableAttributedString(string: formattedStep)
+            let outlineStyle = createOutlineStyle()
+            
+            attributedStringStep.addAttributes([NSAttributedStringKey.paragraphStyle : outlineStyle], range: NSMakeRange(0,attributedStringStep.length))
+            
+            fullAttributedString.append(attributedStringStep)
+        }
+        
+        algorithmText.attributedText = fullAttributedString
         
     }
  private func createOutlineStyle() -> NSParagraphStyle
